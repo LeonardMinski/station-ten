@@ -41,29 +41,25 @@ a {
 }
 
 .station-shell {
-    width: min(100% - 28px, 1120px);
+    width: min(100% - 24px, 360px);
     margin: 0 auto;
-    padding: 22px 0 48px;
+    padding: 18px 0 32px;
 }
 
 .station-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    padding-top: 8px;
+    padding-top: 2px;
 }
 
 .station-header-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 16px 18px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 999px;
-    background: rgba(255, 253, 249, 0.88);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 10px 28px rgba(32, 36, 32, 0.08);
+    gap: 10px;
+    padding: 10px 10px 8px;
+    border: 0;
+    border-radius: 0;
+    background: #ece7e1;
+    box-shadow: none;
 }
 
 .station-logo {
@@ -75,11 +71,11 @@ a {
 .station-logo-script {
     color: var(--station-green);
     font-family: var(--station-script);
-    font-size: 1.9rem;
+    font-size: 1.75rem;
 }
 
 .station-logo-meta {
-    margin-left: 6px;
+    display: none;
     color: rgba(32, 36, 32, 0.62);
     font-family: var(--station-display);
     font-size: 0.72rem;
@@ -89,7 +85,6 @@ a {
 
 .station-nav {
     display: none;
-    gap: 10px;
 }
 
 .station-nav a,
@@ -111,13 +106,13 @@ a {
 
 .station-mobile-nav-wrap summary {
     display: grid;
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     place-items: center;
     list-style: none;
-    border: 1px solid var(--station-line);
-    border-radius: 50%;
-    background: var(--station-paper);
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
     cursor: pointer;
 }
 
@@ -154,7 +149,7 @@ a {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    width: 220px;
+    width: 180px;
     padding: 10px;
     border: 1px solid var(--station-line);
     border-radius: 20px;
@@ -168,12 +163,13 @@ a {
 }
 
 .station-main {
-    padding-top: 24px;
+    background: #f7f5f1;
+    padding-top: 0;
 }
 
 .station-page {
     display: grid;
-    gap: 24px;
+    gap: 14px;
 }
 
 .station-hero,
@@ -186,9 +182,9 @@ a {
 .station-form-card,
 .station-footer-card {
     border: 1px solid var(--station-line);
-    border-radius: var(--station-radius);
+    border-radius: 0;
     background: var(--station-paper);
-    box-shadow: var(--station-shadow);
+    box-shadow: none;
 }
 
 .station-hero,
@@ -196,23 +192,18 @@ a {
 .station-info-card,
 .station-form-card,
 .station-footer-card {
-    padding: 22px;
+    padding: 18px 14px;
 }
 
 .station-hero {
     position: relative;
     overflow: hidden;
+    background: #efefef;
+    min-height: 180px;
 }
 
 .station-hero::after {
-    position: absolute;
-    right: -50px;
-    bottom: -80px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(77, 125, 122, 0.24), transparent 68%);
-    content: "";
+    display: none;
 }
 
 .station-eyebrow {
@@ -232,16 +223,16 @@ a {
 
 .station-hero h1 {
     max-width: 10ch;
-    font-size: clamp(2.3rem, 10vw, 4.6rem);
-    line-height: 0.94;
+    font-size: 2rem;
+    line-height: 1.02;
 }
 
 .station-lead {
-    max-width: 34rem;
-    margin: 14px 0 0;
+    max-width: 16rem;
+    margin: 10px 0 0;
     color: var(--station-muted);
-    font-size: 1.04rem;
-    line-height: 1.55;
+    font-size: 0.95rem;
+    line-height: 1.35;
 }
 
 .station-actions,
@@ -258,22 +249,23 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 18px;
+    padding: 5px 12px;
     border-radius: 999px;
     background: var(--station-green);
     color: #fff;
-    font-size: 0.93rem;
+    font-size: 0.62rem;
     font-weight: 700;
+    text-transform: none;
 }
 
 .station-button-secondary {
     background: transparent;
     color: var(--station-green-dark);
-    border: 1px solid rgba(40, 71, 68, 0.2);
+    border: 1px solid rgba(40, 71, 68, 0.24);
 }
 
 .station-chip-link {
-    padding: 10px 14px;
+    padding: 4px 10px;
 }
 
 .station-section-head {
@@ -281,18 +273,18 @@ a {
     align-items: end;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .station-section-head span {
     color: var(--station-muted);
-    font-size: 0.86rem;
+    font-size: 0.68rem;
 }
 
 .station-stack,
 .station-grid {
     display: grid;
-    gap: 16px;
+    gap: 10px;
 }
 
 .station-grid-two {
@@ -302,7 +294,7 @@ a {
 .station-card,
 .station-info-card,
 .station-menu-card {
-    padding: 20px;
+    padding: 12px;
 }
 
 .station-pill,
@@ -311,11 +303,11 @@ a {
     align-items: center;
     justify-content: center;
     width: fit-content;
-    padding: 7px 11px;
+    padding: 4px 8px;
     border-radius: 999px;
     background: rgba(77, 125, 122, 0.1);
     color: var(--station-green-dark);
-    font-size: 0.75rem;
+    font-size: 0.5rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -329,8 +321,8 @@ a {
 .station-card h3,
 .station-info-card h3,
 .station-menu-card h3 {
-    margin: 14px 0 8px;
-    font-size: 1.35rem;
+    margin: 8px 0 4px;
+    font-size: 0.92rem;
     line-height: 1.14;
 }
 
@@ -340,80 +332,67 @@ a {
 .station-form-card p {
     margin: 0;
     color: var(--station-muted);
-    line-height: 1.55;
+    font-size: 0.6rem;
+    line-height: 1.35;
 }
 
 .station-card .station-button {
-    margin-top: 18px;
+    margin-top: 8px;
 }
 
 .station-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
 }
 
 .station-gallery-card {
-    min-height: 160px;
+    min-height: 68px;
     display: flex;
     flex-direction: column;
     justify-content: end;
-    padding: 14px;
-    background:
-        linear-gradient(180deg, rgba(32, 36, 32, 0.04), rgba(32, 36, 32, 0.18)),
-        linear-gradient(135deg, rgba(147, 166, 148, 0.72), rgba(77, 125, 122, 0.38));
+    padding: 6px;
+    background: #dcdcdc;
 }
 
 .station-gallery-card span,
 .station-gallery-card strong {
-    color: #fff;
+    color: rgba(32, 36, 32, 0.55);
 }
 
 .station-gallery-card span {
-    font-size: 0.8rem;
+    font-size: 0.38rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .station-map-card {
-    padding: 16px;
+    padding: 0;
 }
 
 .station-map-placeholder {
-    min-height: 260px;
-    border-radius: 18px;
-    background:
-        linear-gradient(90deg, rgba(77, 125, 122, 0.08) 1px, transparent 1px),
-        linear-gradient(rgba(77, 125, 122, 0.08) 1px, transparent 1px),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(234, 241, 237, 0.9));
-    background-size: 28px 28px, 28px 28px, auto;
+    min-height: 140px;
+    background: #d9d9d9;
     position: relative;
 }
 
 .station-map-placeholder::after {
-    position: absolute;
-    left: 16%;
-    top: 44%;
-    padding: 10px 14px;
-    border-radius: 999px;
-    background: var(--station-green-dark);
-    color: #fff;
-    font-weight: 700;
-    content: "Station Ten";
+    display: none;
 }
 
 .station-hours {
     display: grid;
-    gap: 10px;
+    gap: 4px;
 }
 
 .station-hours-row {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--station-line);
+    padding-bottom: 0;
+    border-bottom: 0;
+    font-size: 0.72rem;
 }
 
 .station-hours-row:last-child {
@@ -427,31 +406,31 @@ a {
 
 .station-socials span {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--station-line);
+    border: 0;
     border-radius: 50%;
-    background: var(--station-paper);
-    font-size: 0.85rem;
+    background: transparent;
+    font-size: 0.72rem;
     font-weight: 700;
 }
 
 .station-menu-card {
     display: grid;
-    grid-template-columns: 72px 1fr auto;
+    grid-template-columns: 44px 1fr auto;
     align-items: center;
-    gap: 14px;
+    gap: 8px;
+    background: #e7e7e7;
+    border-radius: 8px;
 }
 
 .station-menu-thumb {
-    width: 72px;
-    height: 72px;
-    border-radius: 16px;
-    background:
-        linear-gradient(135deg, rgba(147, 166, 148, 0.44), rgba(77, 125, 122, 0.18)),
-        #eef3ef;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    background: #f4f4f4;
 }
 
 .station-menu-copy h3 {
@@ -460,7 +439,7 @@ a {
 
 .station-menu-price {
     font-family: var(--station-display);
-    font-size: 1.3rem;
+    font-size: 0.9rem;
 }
 
 .station-booking-layout {
@@ -470,16 +449,16 @@ a {
 .station-calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-top: 16px;
+    gap: 4px;
+    margin-top: 10px;
     text-align: center;
-    font-size: 0.82rem;
+    font-size: 0.56rem;
 }
 
 .station-calendar span,
 .station-time-row span {
-    padding: 11px 0;
-    border-radius: 12px;
+    padding: 6px 0;
+    border-radius: 8px;
 }
 
 .station-day {
@@ -494,41 +473,33 @@ a {
 .station-time-row {
     display: flex;
     gap: 12px;
-    margin-top: 16px;
+    margin-top: 10px;
 }
 
 .station-time-row span {
     flex: 1;
     background: rgba(77, 125, 122, 0.08);
     font-family: var(--station-display);
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 
 .station-notes-card {
-    min-height: 180px;
+    min-height: 120px;
 }
 
 .station-footer {
-    padding-top: 24px;
+    padding-top: 12px;
 }
 
 .station-footer-card p {
     margin: 0;
     color: var(--station-muted);
+    font-size: 0.62rem;
 }
 
 @media (min-width: 760px) {
     .station-shell {
-        width: min(100% - 40px, 1120px);
-        padding-top: 28px;
-    }
-
-    .station-nav {
-        display: flex;
-    }
-
-    .station-mobile-nav-wrap {
-        display: none;
+        width: 360px;
     }
 
     .station-grid-two,
