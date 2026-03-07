@@ -3,6 +3,7 @@
 function stationten_setup()
 {
     add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
     add_theme_support(
         'html5',
         array('search-form', 'gallery', 'caption', 'style', 'script')
@@ -30,6 +31,45 @@ function stationten_enqueue_assets()
 }
 
 add_action('wp_enqueue_scripts', 'stationten_enqueue_assets');
+
+function stationten_register_post_types()
+{
+    register_post_type(
+        'station_event',
+        array(
+            'labels' => array(
+                'name' => 'Events',
+                'singular_name' => 'Event',
+                'add_new_item' => 'Add New Event',
+                'edit_item' => 'Edit Event',
+            ),
+            'public' => false,
+            'show_ui' => true,
+            'show_in_rest' => true,
+            'menu_icon' => 'dashicons-calendar-alt',
+            'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
+        )
+    );
+
+    register_post_type(
+        'station_menu_item',
+        array(
+            'labels' => array(
+                'name' => 'Menu Items',
+                'singular_name' => 'Menu Item',
+                'add_new_item' => 'Add New Menu Item',
+                'edit_item' => 'Edit Menu Item',
+            ),
+            'public' => false,
+            'show_ui' => true,
+            'show_in_rest' => true,
+            'menu_icon' => 'dashicons-food',
+            'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
+        )
+    );
+}
+
+add_action('init', 'stationten_register_post_types');
 
 function stationten_seed_pages()
 {
@@ -60,7 +100,7 @@ function stationten_seed_pages()
 
 add_action('init', 'stationten_seed_pages');
 
-function stationten_data()
+function stationten_default_data()
 {
     return array(
         'events' => array(
@@ -68,72 +108,89 @@ function stationten_data()
                 'date' => 'Fri 12 Jan',
                 'title' => 'Live Jazz Night',
                 'description' => 'Live jazz with guest horns, late cocktails, and a room built for long sets.',
+                'status' => 'upcoming',
             ),
             array(
                 'date' => 'Fri 19 Jan',
                 'title' => 'Soul & R&B Sessions',
                 'description' => 'Resident selectors, smooth soul, and warm lighting for a slower Friday crowd.',
+                'status' => 'upcoming',
             ),
             array(
                 'date' => 'Fri 26 Jan',
                 'title' => 'Open Mic & Guest Performers',
                 'description' => 'A rotating line-up of local performers, spoken word, and first-time artists.',
+                'status' => 'upcoming',
             ),
-        ),
-        'past_events' => array(
             array(
-                'label' => '12/2025',
+                'date' => '12/2025',
                 'title' => 'Jazz night',
+                'description' => 'A packed room and a late finish.',
+                'status' => 'past',
             ),
             array(
-                'label' => '02/2026',
+                'date' => '02/2026',
                 'title' => 'Soul night',
+                'description' => 'Selectors, guests, and a full floor.',
+                'status' => 'past',
             ),
             array(
-                'label' => '01/2026',
+                'date' => '01/2026',
                 'title' => 'Open mic',
+                'description' => 'Local talent and first-time performers.',
+                'status' => 'past',
             ),
             array(
-                'label' => '12/2025',
+                'date' => '12/2025',
                 'title' => 'Private hire',
+                'description' => 'Private celebration with drinks and music.',
+                'status' => 'past',
             ),
         ),
-        'menu' => array(
-            'food' => array(
-                array(
-                    'title' => 'Curry Goat',
-                    'price' => '£15.00',
-                    'description' => 'Slow-cooked goat, coconut gravy, rice and peas.',
-                ),
-                array(
-                    'title' => 'Jerk Chicken Bowl',
-                    'price' => '£14.00',
-                    'description' => 'Charred jerk chicken, slaw, pickles, and seasoned rice.',
-                ),
-                array(
-                    'title' => 'Plantain & Pepper Stew',
-                    'price' => '£12.50',
-                    'description' => 'Sweet plantain, braised peppers, herbs, and cassava crisps.',
-                ),
+        'menu_items' => array(
+            array(
+                'group' => 'food',
+                'title' => 'Curry Goat',
+                'price' => '£15.00',
+                'description' => 'Slow-cooked goat, coconut gravy, rice and peas.',
             ),
-            'drinks' => array(
-                array(
-                    'title' => 'Station House',
-                    'price' => '£11.00',
-                    'description' => 'Dark rum, pineapple, lime, bitters, and smoked orange.',
-                ),
-                array(
-                    'title' => 'Late Platform',
-                    'price' => '£10.50',
-                    'description' => 'Gin, elderflower, cucumber, and sparkling apple.',
-                ),
-                array(
-                    'title' => 'No.10 Spritz',
-                    'price' => '£9.50',
-                    'description' => 'Aperitif blend, blood orange, soda, and rosemary.',
-                ),
+            array(
+                'group' => 'food',
+                'title' => 'Jerk Chicken Bowl',
+                'price' => '£14.00',
+                'description' => 'Charred jerk chicken, slaw, pickles, and seasoned rice.',
+            ),
+            array(
+                'group' => 'food',
+                'title' => 'Plantain & Pepper Stew',
+                'price' => '£12.50',
+                'description' => 'Sweet plantain, braised peppers, herbs, and cassava crisps.',
+            ),
+            array(
+                'group' => 'drinks',
+                'title' => 'Station House',
+                'price' => '£11.00',
+                'description' => 'Dark rum, pineapple, lime, bitters, and smoked orange.',
+            ),
+            array(
+                'group' => 'drinks',
+                'title' => 'Late Platform',
+                'price' => '£10.50',
+                'description' => 'Gin, elderflower, cucumber, and sparkling apple.',
+            ),
+            array(
+                'group' => 'drinks',
+                'title' => 'No.10 Spritz',
+                'price' => '£9.50',
+                'description' => 'Aperitif blend, blood orange, soda, and rosemary.',
             ),
         ),
+    );
+}
+
+function stationten_data()
+{
+    return array(
         'booking_types' => array(
             'event-hire' => array(
                 'label' => 'Event Hire',
@@ -192,6 +249,213 @@ function stationten_data()
         'phone' => '020 0000 0010',
     );
 }
+
+function stationten_seed_editable_content()
+{
+    if (get_option('stationten_seeded_content')) {
+        return;
+    }
+
+    $defaults = stationten_default_data();
+
+    if (!get_posts(array('post_type' => 'station_event', 'posts_per_page' => 1, 'fields' => 'ids'))) {
+        foreach ($defaults['events'] as $index => $event) {
+            $post_id = wp_insert_post(
+                array(
+                    'post_type' => 'station_event',
+                    'post_status' => 'publish',
+                    'post_title' => $event['title'],
+                    'post_excerpt' => $event['description'],
+                    'menu_order' => $index,
+                )
+            );
+
+            if ($post_id && !is_wp_error($post_id)) {
+                update_post_meta($post_id, 'stationten_event_date_label', $event['date']);
+                update_post_meta($post_id, 'stationten_event_status', $event['status']);
+            }
+        }
+    }
+
+    if (!get_posts(array('post_type' => 'station_menu_item', 'posts_per_page' => 1, 'fields' => 'ids'))) {
+        foreach ($defaults['menu_items'] as $index => $item) {
+            $post_id = wp_insert_post(
+                array(
+                    'post_type' => 'station_menu_item',
+                    'post_status' => 'publish',
+                    'post_title' => $item['title'],
+                    'post_excerpt' => $item['description'],
+                    'menu_order' => $index,
+                )
+            );
+
+            if ($post_id && !is_wp_error($post_id)) {
+                update_post_meta($post_id, 'stationten_menu_group', $item['group']);
+                update_post_meta($post_id, 'stationten_menu_price', $item['price']);
+            }
+        }
+    }
+
+    update_option('stationten_seeded_content', 1);
+}
+
+add_action('init', 'stationten_seed_editable_content');
+
+function stationten_add_meta_boxes()
+{
+    add_meta_box(
+        'stationten-event-details',
+        'Event Details',
+        'stationten_render_event_meta_box',
+        'station_event',
+        'side'
+    );
+
+    add_meta_box(
+        'stationten-menu-details',
+        'Menu Item Details',
+        'stationten_render_menu_meta_box',
+        'station_menu_item',
+        'side'
+    );
+}
+
+add_action('add_meta_boxes', 'stationten_add_meta_boxes');
+
+function stationten_render_event_meta_box($post)
+{
+    wp_nonce_field('stationten_save_meta', 'stationten_meta_nonce');
+
+    $date_label = get_post_meta($post->ID, 'stationten_event_date_label', true);
+    $status = get_post_meta($post->ID, 'stationten_event_status', true);
+    ?>
+    <p>
+        <label for="stationten_event_date_label"><strong>Date label</strong></label><br>
+        <input id="stationten_event_date_label" name="stationten_event_date_label" type="text" value="<?php echo esc_attr($date_label); ?>" style="width:100%;">
+    </p>
+    <p>
+        <label for="stationten_event_status"><strong>Status</strong></label><br>
+        <select id="stationten_event_status" name="stationten_event_status" style="width:100%;">
+            <option value="upcoming" <?php selected($status, 'upcoming'); ?>>Upcoming</option>
+            <option value="past" <?php selected($status, 'past'); ?>>Past</option>
+        </select>
+    </p>
+    <p>Use the featured image for past-event gallery visuals. Use Excerpt for the short card description.</p>
+    <?php
+}
+
+function stationten_render_menu_meta_box($post)
+{
+    wp_nonce_field('stationten_save_meta', 'stationten_meta_nonce');
+
+    $group = get_post_meta($post->ID, 'stationten_menu_group', true);
+    $price = get_post_meta($post->ID, 'stationten_menu_price', true);
+    ?>
+    <p>
+        <label for="stationten_menu_group"><strong>Group</strong></label><br>
+        <select id="stationten_menu_group" name="stationten_menu_group" style="width:100%;">
+            <option value="food" <?php selected($group, 'food'); ?>>Food</option>
+            <option value="drinks" <?php selected($group, 'drinks'); ?>>Drinks</option>
+        </select>
+    </p>
+    <p>
+        <label for="stationten_menu_price"><strong>Price</strong></label><br>
+        <input id="stationten_menu_price" name="stationten_menu_price" type="text" value="<?php echo esc_attr($price); ?>" style="width:100%;">
+    </p>
+    <p>Use the featured image for the menu thumbnail. Use Excerpt for the short menu description.</p>
+    <?php
+}
+
+function stationten_save_meta($post_id)
+{
+    if (!isset($_POST['stationten_meta_nonce'])) {
+        return;
+    }
+
+    if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['stationten_meta_nonce'])), 'stationten_save_meta')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    $post_type = get_post_type($post_id);
+
+    if ('station_event' === $post_type) {
+        update_post_meta(
+            $post_id,
+            'stationten_event_date_label',
+            sanitize_text_field(wp_unslash($_POST['stationten_event_date_label'] ?? ''))
+        );
+        update_post_meta(
+            $post_id,
+            'stationten_event_status',
+            sanitize_text_field(wp_unslash($_POST['stationten_event_status'] ?? 'upcoming'))
+        );
+    }
+
+    if ('station_menu_item' === $post_type) {
+        update_post_meta(
+            $post_id,
+            'stationten_menu_group',
+            sanitize_text_field(wp_unslash($_POST['stationten_menu_group'] ?? 'food'))
+        );
+        update_post_meta(
+            $post_id,
+            'stationten_menu_price',
+            sanitize_text_field(wp_unslash($_POST['stationten_menu_price'] ?? ''))
+        );
+    }
+}
+
+add_action('save_post', 'stationten_save_meta');
+
+function stationten_event_columns($columns)
+{
+    $columns['stationten_event_date_label'] = 'Date';
+    $columns['stationten_event_status'] = 'Status';
+
+    return $columns;
+}
+
+add_filter('manage_station_event_posts_columns', 'stationten_event_columns');
+
+function stationten_menu_columns($columns)
+{
+    $columns['stationten_menu_group'] = 'Group';
+    $columns['stationten_menu_price'] = 'Price';
+
+    return $columns;
+}
+
+add_filter('manage_station_menu_item_posts_columns', 'stationten_menu_columns');
+
+function stationten_render_admin_columns($column, $post_id)
+{
+    if ('stationten_event_date_label' === $column) {
+        echo esc_html(get_post_meta($post_id, 'stationten_event_date_label', true));
+    }
+
+    if ('stationten_event_status' === $column) {
+        echo esc_html(ucfirst(get_post_meta($post_id, 'stationten_event_status', true)));
+    }
+
+    if ('stationten_menu_group' === $column) {
+        echo esc_html(ucfirst(get_post_meta($post_id, 'stationten_menu_group', true)));
+    }
+
+    if ('stationten_menu_price' === $column) {
+        echo esc_html(get_post_meta($post_id, 'stationten_menu_price', true));
+    }
+}
+
+add_action('manage_station_event_posts_custom_column', 'stationten_render_admin_columns', 10, 2);
+add_action('manage_station_menu_item_posts_custom_column', 'stationten_render_admin_columns', 10, 2);
 
 function stationten_page_url($slug)
 {
@@ -280,11 +544,56 @@ function stationten_render_nav($class_name = '')
     echo '</nav>';
 }
 
+function stationten_get_event_entries($status)
+{
+    $query = new WP_Query(
+        array(
+            'post_type' => 'station_event',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'meta_key' => 'stationten_event_status',
+            'meta_value' => $status,
+            'orderby' => array(
+                'menu_order' => 'ASC',
+                'date' => 'DESC',
+            ),
+            'order' => 'ASC',
+        )
+    );
+
+    $entries = array();
+
+    if ($query->have_posts()) {
+        foreach ($query->posts as $post) {
+            $entries[] = array(
+                'date' => get_post_meta($post->ID, 'stationten_event_date_label', true),
+                'title' => get_the_title($post),
+                'description' => get_the_excerpt($post),
+                'image' => get_the_post_thumbnail_url($post, 'medium_large'),
+            );
+        }
+
+        wp_reset_postdata();
+
+        return $entries;
+    }
+
+    $defaults = stationten_default_data();
+
+    foreach ($defaults['events'] as $event) {
+        if ($event['status'] === $status) {
+            $entries[] = $event;
+        }
+    }
+
+    return $entries;
+}
+
 function stationten_render_event_cards()
 {
-    $data = stationten_data();
+    $events = stationten_get_event_entries('upcoming');
 
-    foreach ($data['events'] as $event) {
+    foreach ($events as $event) {
         echo '<article class="station-card">';
         echo '<span class="station-pill">' . esc_html($event['date']) . '</span>';
         echo '<h3>' . esc_html($event['title']) . '</h3>';
@@ -296,23 +605,80 @@ function stationten_render_event_cards()
 
 function stationten_render_past_events()
 {
-    $data = stationten_data();
+    $events = stationten_get_event_entries('past');
 
-    foreach ($data['past_events'] as $item) {
-        echo '<article class="station-gallery-card">';
-        echo '<span>' . esc_html($item['label']) . '</span>';
-        echo '<strong>' . esc_html($item['title']) . '</strong>';
+    foreach ($events as $event) {
+        $style = '';
+
+        if (!empty($event['image'])) {
+            $style = ' style="background-image: linear-gradient(180deg, rgba(32, 36, 32, 0.08), rgba(32, 36, 32, 0.32)), url(' . esc_url($event['image']) . ');"';
+        }
+
+        echo '<article class="station-gallery-card"' . $style . '>';
+        echo '<span>' . esc_html($event['date']) . '</span>';
+        echo '<strong>' . esc_html($event['title']) . '</strong>';
         echo '</article>';
     }
 }
 
+function stationten_get_menu_entries($group)
+{
+    $query = new WP_Query(
+        array(
+            'post_type' => 'station_menu_item',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'meta_key' => 'stationten_menu_group',
+            'meta_value' => $group,
+            'orderby' => array(
+                'menu_order' => 'ASC',
+                'date' => 'ASC',
+            ),
+            'order' => 'ASC',
+        )
+    );
+
+    $entries = array();
+
+    if ($query->have_posts()) {
+        foreach ($query->posts as $post) {
+            $entries[] = array(
+                'title' => get_the_title($post),
+                'price' => get_post_meta($post->ID, 'stationten_menu_price', true),
+                'description' => get_the_excerpt($post),
+                'image' => get_the_post_thumbnail_url($post, 'thumbnail'),
+            );
+        }
+
+        wp_reset_postdata();
+
+        return $entries;
+    }
+
+    $defaults = stationten_default_data();
+
+    foreach ($defaults['menu_items'] as $item) {
+        if ($item['group'] === $group) {
+            $entries[] = $item;
+        }
+    }
+
+    return $entries;
+}
+
 function stationten_render_menu_items($group)
 {
-    $data = stationten_data();
+    $items = stationten_get_menu_entries($group);
 
-    foreach ($data['menu'][$group] as $item) {
+    foreach ($items as $item) {
         echo '<article class="station-menu-card">';
-        echo '<div class="station-menu-thumb" aria-hidden="true"></div>';
+        echo '<div class="station-menu-thumb" aria-hidden="true">';
+
+        if (!empty($item['image'])) {
+            echo '<img src="' . esc_url($item['image']) . '" alt="">';
+        }
+
+        echo '</div>';
         echo '<div class="station-menu-copy">';
         echo '<h3>' . esc_html($item['title']) . '</h3>';
         echo '<p>' . esc_html($item['description']) . '</p>';

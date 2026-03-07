@@ -425,6 +425,8 @@ textarea {
     background:
         linear-gradient(180deg, rgba(32, 36, 32, 0.02), rgba(32, 36, 32, 0.16)),
         linear-gradient(135deg, rgba(147, 166, 148, 0.7), rgba(77, 125, 122, 0.36));
+    background-position: center;
+    background-size: cover;
 }
 
 .station-gallery-card span,
@@ -538,9 +540,16 @@ textarea {
     width: 72px;
     height: 72px;
     border-radius: 18px;
+    overflow: hidden;
     background:
         linear-gradient(135deg, rgba(147, 166, 148, 0.44), rgba(77, 125, 122, 0.18)),
         #eef3ef;
+}
+
+.station-menu-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .station-menu-copy h3 {
