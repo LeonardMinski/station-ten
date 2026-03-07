@@ -474,6 +474,10 @@ textarea {
     gap: 10px;
 }
 
+#opening-times .station-button {
+    margin-top: 18px;
+}
+
 .station-hours-row {
     display: flex;
     justify-content: space-between;
