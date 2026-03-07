@@ -20,6 +20,7 @@
                     <span class="station-burger"></span>
                 </summary>
                 <div class="station-mobile-panel">
+                    <p class="station-mobile-title">Explore</p>
                     <?php stationten_render_nav('station-mobile-nav'); ?>
                 </div>
             </details>

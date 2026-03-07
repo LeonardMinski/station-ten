@@ -15,7 +15,7 @@ get_header();
         </div>
     </section>
 
-    <section class="station-section">
+    <section id="food" class="station-section">
         <div class="station-section-head">
             <h2>Food</h2>
             <span>Mains</span>
@@ -25,7 +25,7 @@ get_header();
         </div>
     </section>
 
-    <section class="station-section">
+    <section id="drinks" class="station-section">
         <div class="station-section-head">
             <h2>Drinks</h2>
             <span>Signatures</span>
