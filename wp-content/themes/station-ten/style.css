@@ -594,6 +594,14 @@ textarea {
     gap: 10px;
 }
 
+.station-booking-media {
+    min-height: 140px;
+    border-radius: 18px;
+    background:
+        linear-gradient(135deg, rgba(147, 166, 148, 0.28), rgba(77, 125, 122, 0.14)),
+        #e4e0da;
+}
+
 .station-booking-detail {
     display: grid;
     gap: 18px;

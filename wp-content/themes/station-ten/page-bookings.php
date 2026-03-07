@@ -15,6 +15,7 @@ $data = stationten_data();
     <section class="station-grid station-grid-three">
         <?php foreach ($data['booking_types'] as $slug => $type) : ?>
             <article class="station-booking-card">
+                <div class="station-booking-media" aria-hidden="true"></div>
                 <span class="station-pill"><?php echo esc_html($type['label']); ?></span>
                 <h3><?php echo esc_html($type['title']); ?></h3>
                 <p><?php echo esc_html($type['description']); ?></p>
