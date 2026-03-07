@@ -348,6 +348,8 @@ textarea {
 
 .station-pill,
 .station-tab {
+    border: 0;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -440,6 +442,7 @@ textarea {
 .station-contact-grid {
     display: grid;
     gap: 16px;
+    grid-template-columns: 1fr;
 }
 
 .station-map-card {
@@ -506,6 +509,15 @@ textarea {
     border-radius: 50%;
     background: var(--station-paper);
     color: var(--station-green-dark);
+}
+
+.station-socials {
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.station-socials a {
+    flex: 0 0 auto;
 }
 
 .station-socials svg {
@@ -613,7 +625,6 @@ textarea {
 
     .station-link-grid,
     .station-grid-two,
-    .station-contact-grid,
     .station-booking-detail {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
