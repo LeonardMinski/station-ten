@@ -40,10 +40,12 @@ $data = stationten_data();
         </div>
         <div class="station-link-grid">
             <a class="station-link-card" href="<?php echo esc_url(stationten_page_url('menu') . '#food'); ?>">
+                <div class="station-link-media" aria-hidden="true"></div>
                 <span class="station-pill">Food</span>
                 <strong>Mains and small plates</strong>
             </a>
             <a class="station-link-card" href="<?php echo esc_url(stationten_page_url('menu') . '#drinks'); ?>">
+                <div class="station-link-media" aria-hidden="true"></div>
                 <span class="station-pill">Drinks</span>
                 <strong>Cocktails and signatures</strong>
             </a>
