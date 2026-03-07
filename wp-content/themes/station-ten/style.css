@@ -1,0 +1,547 @@
+/*
+Theme Name: Station Ten
+Author: Leonard Minski
+Version: 1.0
+*/
+
+:root {
+    --station-bg: #f2ede6;
+    --station-paper: #fffdf9;
+    --station-line: rgba(31, 36, 33, 0.08);
+    --station-ink: #202420;
+    --station-muted: rgba(32, 36, 32, 0.68);
+    --station-green: #4d7d7a;
+    --station-green-dark: #284744;
+    --station-sage: #93a694;
+    --station-shadow: 0 18px 40px rgba(40, 71, 68, 0.12);
+    --station-radius: 24px;
+    --station-display: Georgia, "Times New Roman", serif;
+    --station-script: "Snell Roundhand", "Brush Script MT", cursive;
+    --station-copy: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top left, rgba(147, 166, 148, 0.22), transparent 28%),
+        linear-gradient(180deg, #f0e8df 0%, #f7f3ed 50%, #efe8df 100%);
+    color: var(--station-ink);
+    font-family: var(--station-copy);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.station-shell {
+    width: min(100% - 28px, 1120px);
+    margin: 0 auto;
+    padding: 22px 0 48px;
+}
+
+.station-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding-top: 8px;
+}
+
+.station-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    background: rgba(255, 253, 249, 0.88);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 28px rgba(32, 36, 32, 0.08);
+}
+
+.station-logo {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 0.9;
+}
+
+.station-logo-script {
+    color: var(--station-green);
+    font-family: var(--station-script);
+    font-size: 1.9rem;
+}
+
+.station-logo-meta {
+    margin-left: 6px;
+    color: rgba(32, 36, 32, 0.62);
+    font-family: var(--station-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.station-nav {
+    display: none;
+    gap: 10px;
+}
+
+.station-nav a,
+.station-mobile-nav a {
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+}
+
+.station-nav .is-current,
+.station-mobile-nav .is-current {
+    background: var(--station-green-dark);
+    color: #fff;
+}
+
+.station-mobile-nav-wrap {
+    position: relative;
+}
+
+.station-mobile-nav-wrap summary {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    list-style: none;
+    border: 1px solid var(--station-line);
+    border-radius: 50%;
+    background: var(--station-paper);
+    cursor: pointer;
+}
+
+.station-mobile-nav-wrap summary::-webkit-details-marker {
+    display: none;
+}
+
+.station-burger,
+.station-burger::before,
+.station-burger::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--station-ink);
+    content: "";
+}
+
+.station-burger {
+    position: relative;
+}
+
+.station-burger::before {
+    position: absolute;
+    top: -6px;
+}
+
+.station-burger::after {
+    position: absolute;
+    top: 6px;
+}
+
+.station-mobile-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 220px;
+    padding: 10px;
+    border: 1px solid var(--station-line);
+    border-radius: 20px;
+    background: rgba(255, 253, 249, 0.98);
+    box-shadow: var(--station-shadow);
+}
+
+.station-mobile-nav {
+    display: grid;
+    gap: 4px;
+}
+
+.station-main {
+    padding-top: 24px;
+}
+
+.station-page {
+    display: grid;
+    gap: 24px;
+}
+
+.station-hero,
+.station-section,
+.station-info-card,
+.station-card,
+.station-gallery-card,
+.station-map-card,
+.station-menu-card,
+.station-form-card,
+.station-footer-card {
+    border: 1px solid var(--station-line);
+    border-radius: var(--station-radius);
+    background: var(--station-paper);
+    box-shadow: var(--station-shadow);
+}
+
+.station-hero,
+.station-section,
+.station-info-card,
+.station-form-card,
+.station-footer-card {
+    padding: 22px;
+}
+
+.station-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.station-hero::after {
+    position: absolute;
+    right: -50px;
+    bottom: -80px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(77, 125, 122, 0.24), transparent 68%);
+    content: "";
+}
+
+.station-eyebrow {
+    margin: 0 0 10px;
+    color: var(--station-green);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.station-hero h1,
+.station-section-head h2 {
+    margin: 0;
+    font-family: var(--station-display);
+}
+
+.station-hero h1 {
+    max-width: 10ch;
+    font-size: clamp(2.3rem, 10vw, 4.6rem);
+    line-height: 0.94;
+}
+
+.station-lead {
+    max-width: 34rem;
+    margin: 14px 0 0;
+    color: var(--station-muted);
+    font-size: 1.04rem;
+    line-height: 1.55;
+}
+
+.station-actions,
+.station-socials,
+.station-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.station-button,
+.station-chip-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--station-green);
+    color: #fff;
+    font-size: 0.93rem;
+    font-weight: 700;
+}
+
+.station-button-secondary {
+    background: transparent;
+    color: var(--station-green-dark);
+    border: 1px solid rgba(40, 71, 68, 0.2);
+}
+
+.station-chip-link {
+    padding: 10px 14px;
+}
+
+.station-section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.station-section-head span {
+    color: var(--station-muted);
+    font-size: 0.86rem;
+}
+
+.station-stack,
+.station-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.station-grid-two {
+    grid-template-columns: 1fr;
+}
+
+.station-card,
+.station-info-card,
+.station-menu-card {
+    padding: 20px;
+}
+
+.station-pill,
+.station-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(77, 125, 122, 0.1);
+    color: var(--station-green-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.station-tab-active {
+    background: var(--station-green-dark);
+    color: #fff;
+}
+
+.station-card h3,
+.station-info-card h3,
+.station-menu-card h3 {
+    margin: 14px 0 8px;
+    font-size: 1.35rem;
+    line-height: 1.14;
+}
+
+.station-card p,
+.station-info-card p,
+.station-menu-card p,
+.station-form-card p {
+    margin: 0;
+    color: var(--station-muted);
+    line-height: 1.55;
+}
+
+.station-card .station-button {
+    margin-top: 18px;
+}
+
+.station-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.station-gallery-card {
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 14px;
+    background:
+        linear-gradient(180deg, rgba(32, 36, 32, 0.04), rgba(32, 36, 32, 0.18)),
+        linear-gradient(135deg, rgba(147, 166, 148, 0.72), rgba(77, 125, 122, 0.38));
+}
+
+.station-gallery-card span,
+.station-gallery-card strong {
+    color: #fff;
+}
+
+.station-gallery-card span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.station-map-card {
+    padding: 16px;
+}
+
+.station-map-placeholder {
+    min-height: 260px;
+    border-radius: 18px;
+    background:
+        linear-gradient(90deg, rgba(77, 125, 122, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(77, 125, 122, 0.08) 1px, transparent 1px),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(234, 241, 237, 0.9));
+    background-size: 28px 28px, 28px 28px, auto;
+    position: relative;
+}
+
+.station-map-placeholder::after {
+    position: absolute;
+    left: 16%;
+    top: 44%;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: var(--station-green-dark);
+    color: #fff;
+    font-weight: 700;
+    content: "Station Ten";
+}
+
+.station-hours {
+    display: grid;
+    gap: 10px;
+}
+
+.station-hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--station-line);
+}
+
+.station-hours-row:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.station-address {
+    margin-top: 18px;
+}
+
+.station-socials span {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--station-line);
+    border-radius: 50%;
+    background: var(--station-paper);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.station-menu-card {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    align-items: center;
+    gap: 14px;
+}
+
+.station-menu-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background:
+        linear-gradient(135deg, rgba(147, 166, 148, 0.44), rgba(77, 125, 122, 0.18)),
+        #eef3ef;
+}
+
+.station-menu-copy h3 {
+    margin-top: 0;
+}
+
+.station-menu-price {
+    font-family: var(--station-display);
+    font-size: 1.3rem;
+}
+
+.station-booking-layout {
+    align-items: start;
+}
+
+.station-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.82rem;
+}
+
+.station-calendar span,
+.station-time-row span {
+    padding: 11px 0;
+    border-radius: 12px;
+}
+
+.station-day {
+    background: rgba(77, 125, 122, 0.08);
+}
+
+.station-day-active {
+    background: var(--station-green-dark);
+    color: #fff;
+}
+
+.station-time-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.station-time-row span {
+    flex: 1;
+    background: rgba(77, 125, 122, 0.08);
+    font-family: var(--station-display);
+    font-size: 1.6rem;
+}
+
+.station-notes-card {
+    min-height: 180px;
+}
+
+.station-footer {
+    padding-top: 24px;
+}
+
+.station-footer-card p {
+    margin: 0;
+    color: var(--station-muted);
+}
+
+@media (min-width: 760px) {
+    .station-shell {
+        width: min(100% - 40px, 1120px);
+        padding-top: 28px;
+    }
+
+    .station-nav {
+        display: flex;
+    }
+
+    .station-mobile-nav-wrap {
+        display: none;
+    }
+
+    .station-grid-two,
+    .station-booking-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .station-home {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        align-items: start;
+    }
+
+    .station-home .station-hero {
+        grid-column: 1 / -1;
+    }
+}
