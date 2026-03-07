@@ -388,6 +388,31 @@ textarea {
     line-height: 1.55;
 }
 
+.station-card {
+    display: grid;
+    gap: 14px;
+}
+
+.station-event-media {
+    min-height: 120px;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+        linear-gradient(135deg, rgba(147, 166, 148, 0.28), rgba(77, 125, 122, 0.14)),
+        #e4e0da;
+}
+
+.station-event-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.station-event-copy {
+    display: grid;
+    gap: 4px;
+}
+
 .station-link-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -464,8 +489,9 @@ textarea {
 
 .station-map-placeholder::after {
     position: absolute;
-    left: 15%;
-    top: 45%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     padding: 10px 14px;
     border-radius: 999px;
     background: var(--station-green-dark);
@@ -645,6 +671,16 @@ textarea {
     .station-grid-three {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+
+    .station-card {
+        grid-template-columns: 140px 1fr;
+        align-items: start;
+    }
+
+    .station-event-media {
+        min-height: 100%;
+        height: 100%;
+    }
 }
 
 @media (min-width: 920px) {
@@ -692,5 +728,13 @@ textarea {
     .station-menu-price {
         grid-column: 2;
         justify-self: start;
+    }
+
+    .station-card {
+        grid-template-columns: 1fr;
+    }
+
+    .station-event-media {
+        min-height: 120px;
     }
 }

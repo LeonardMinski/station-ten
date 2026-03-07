@@ -595,10 +595,19 @@ function stationten_render_event_cards()
 
     foreach ($events as $event) {
         echo '<article class="station-card">';
+        echo '<div class="station-event-media" aria-hidden="' . (empty($event['image']) ? 'true' : 'false') . '">';
+
+        if (!empty($event['image'])) {
+            echo '<img src="' . esc_url($event['image']) . '" alt="">';
+        }
+
+        echo '</div>';
+        echo '<div class="station-event-copy">';
         echo '<span class="station-pill">' . esc_html($event['date']) . '</span>';
         echo '<h3>' . esc_html($event['title']) . '</h3>';
         echo '<p>' . esc_html($event['description']) . '</p>';
         echo '<a class="station-button" href="' . esc_url(stationten_page_url('event-hire')) . '">View details</a>';
+        echo '</div>';
         echo '</article>';
     }
 }
