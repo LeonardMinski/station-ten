@@ -77,6 +77,7 @@ function stationten_seed_pages()
         'events' => 'Events',
         'menu' => 'Menu & Drinks',
         'bookings' => 'Bookings',
+        'contact' => 'Contact Us',
         'event-hire' => 'Event Hire',
         'co-working' => 'Co-Working',
         'private-hire' => 'Private Hire',
@@ -246,7 +247,123 @@ function stationten_data()
         ),
         'address' => '10 Sydenham Station Approach, London SE26 5EU',
         'email' => 'hello@stationten.co.uk',
+        'bookings_email' => 'bookings@stationten.co.uk',
         'phone' => '020 0000 0010',
+    );
+}
+
+function stationten_send_form_email($args)
+{
+    $defaults = array(
+        'nonce_action' => 'stationten_form',
+        'nonce_field' => 'stationten_form_nonce',
+        'recipient' => '',
+        'subject' => '',
+        'message_intro' => '',
+        'fields' => array(),
+    );
+
+    $args = wp_parse_args($args, $defaults);
+
+    if ('POST' !== $_SERVER['REQUEST_METHOD']) {
+        return array(
+            'submitted' => false,
+            'success' => false,
+            'message' => '',
+        );
+    }
+
+    if (!isset($_POST[$args['nonce_field']])) {
+        return array(
+            'submitted' => false,
+            'success' => false,
+            'message' => '',
+        );
+    }
+
+    $nonce = sanitize_text_field(wp_unslash($_POST[$args['nonce_field']]));
+
+    if (!wp_verify_nonce($nonce, $args['nonce_action'])) {
+        return array(
+            'submitted' => true,
+            'success' => false,
+            'message' => 'Security check failed. Please try again.',
+        );
+    }
+
+    $name = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
+    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
+
+    if (!$name || !$email) {
+        return array(
+            'submitted' => true,
+            'success' => false,
+            'message' => 'Please complete the required fields.',
+        );
+    }
+
+    $lines = array($args['message_intro'], '');
+
+    foreach ($args['fields'] as $label => $value) {
+        $lines[] = $label . ': ' . $value;
+    }
+
+    $headers = array('Reply-To: ' . $name . ' <' . $email . '>');
+    $body = implode("\n", array_filter($lines, 'strlen'));
+    $sent = wp_mail($args['recipient'], $args['subject'], $body, $headers);
+
+    return array(
+        'submitted' => true,
+        'success' => (bool) $sent,
+        'message' => $sent
+            ? 'Your request has been sent successfully.'
+            : 'There was a problem sending your request. Please try again.',
+    );
+}
+
+function stationten_process_booking_submission($booking_label)
+{
+    $data = stationten_data();
+
+    return stationten_send_form_email(
+        array(
+            'nonce_action' => 'stationten_booking',
+            'nonce_field' => 'stationten_booking_nonce',
+            'recipient' => $data['bookings_email'],
+            'subject' => 'Station Ten booking request: ' . $booking_label,
+            'message_intro' => 'A new booking request has been submitted.',
+            'fields' => array(
+                'Booking type' => $booking_label,
+                'Name' => sanitize_text_field(wp_unslash($_POST['name'] ?? '')),
+                'Email' => sanitize_email(wp_unslash($_POST['email'] ?? '')),
+                'Phone' => sanitize_text_field(wp_unslash($_POST['phone'] ?? '')),
+                'Date' => sanitize_text_field(wp_unslash($_POST['booking_date'] ?? '')),
+                'Time' => sanitize_text_field(wp_unslash($_POST['booking_time'] ?? '')),
+                'Guests' => sanitize_text_field(wp_unslash($_POST['guest_count'] ?? '')),
+                'Requirements' => sanitize_textarea_field(wp_unslash($_POST['requirements'] ?? '')),
+            ),
+        )
+    );
+}
+
+function stationten_process_contact_submission()
+{
+    $data = stationten_data();
+
+    return stationten_send_form_email(
+        array(
+            'nonce_action' => 'stationten_contact',
+            'nonce_field' => 'stationten_contact_nonce',
+            'recipient' => $data['email'],
+            'subject' => 'Station Ten contact enquiry: ' . sanitize_text_field(wp_unslash($_POST['subject'] ?? 'General enquiry')),
+            'message_intro' => 'A new contact enquiry has been submitted.',
+            'fields' => array(
+                'Name' => sanitize_text_field(wp_unslash($_POST['name'] ?? '')),
+                'Email' => sanitize_email(wp_unslash($_POST['email'] ?? '')),
+                'Subject' => sanitize_text_field(wp_unslash($_POST['subject'] ?? '')),
+                'Message' => sanitize_textarea_field(wp_unslash($_POST['message'] ?? '')),
+            ),
+        )
     );
 }
 
@@ -505,6 +622,11 @@ function stationten_nav_items()
             'slug' => 'bookings',
             'label' => 'Bookings',
             'url' => stationten_page_url('bookings'),
+        ),
+        array(
+            'slug' => 'contact',
+            'label' => 'Contact',
+            'url' => stationten_page_url('contact'),
         ),
         array(
             'slug' => 'opening-times',

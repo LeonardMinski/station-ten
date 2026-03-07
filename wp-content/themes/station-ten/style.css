@@ -659,8 +659,15 @@ textarea {
 
 .station-form-success {
     margin-top: 6px;
-    color: var(--station-green-dark);
     font-weight: 700;
+}
+
+.station-form-success.is-success {
+    color: var(--station-green-dark);
+}
+
+.station-form-success.is-error {
+    color: #9a2b2b;
 }
 
 .station-footer {

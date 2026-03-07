@@ -70,7 +70,7 @@ $data = stationten_data();
             <div class="station-hours">
                 <?php stationten_render_hours(); ?>
             </div>
-            <a class="station-button" href="<?php echo esc_url(stationten_page_url('bookings')); ?>">Contact</a>
+            <a class="station-button" href="<?php echo esc_url(stationten_page_url('contact')); ?>">Contact</a>
         </div>
     </section>
 

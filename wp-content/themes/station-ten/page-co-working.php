@@ -1,7 +1,6 @@
 <?php
 $booking_type = stationten_booking_type('co-working');
-$submitted = 'POST' === $_SERVER['REQUEST_METHOD'] && isset($_POST['stationten_booking_nonce'])
-    && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['stationten_booking_nonce'])), 'stationten_booking');
+$result = stationten_process_booking_submission($booking_type['label']);
 
 get_header();
 ?>
@@ -56,8 +55,10 @@ get_header();
                 <textarea name="requirements" rows="6" placeholder="Power access, meeting use, preferred area, or other notes"></textarea>
             </label>
             <button class="station-button" type="submit">Submit booking request</button>
-            <?php if ($submitted) : ?>
-                <p class="station-form-success">Booking request captured for <?php echo esc_html($booking_type['label']); ?>. Connect this form to email or CRM next.</p>
+            <?php if ($result['submitted']) : ?>
+                <p class="station-form-success <?php echo $result['success'] ? 'is-success' : 'is-error'; ?>">
+                    <?php echo esc_html($result['message']); ?>
+                </p>
             <?php endif; ?>
         </form>
     </section>
