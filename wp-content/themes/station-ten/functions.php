@@ -666,6 +666,26 @@ function stationten_render_nav($class_name = '')
     echo '</nav>';
 }
 
+function stationten_event_image_map()
+{
+    return array(
+        'Live Jazz Night' => 'live-jazz.jpg',
+        'Soul & R&B Sessions' => 'rnb.jpg',
+        'Open Mic & Guest Performers' => 'open-mic.jpg',
+    );
+}
+
+function stationten_fallback_event_image($title)
+{
+    $map = stationten_event_image_map();
+
+    if (!isset($map[$title])) {
+        return '';
+    }
+
+    return get_template_directory_uri() . '/assets/images/' . $map[$title];
+}
+
 function stationten_get_event_entries($status)
 {
     $query = new WP_Query(
@@ -687,11 +707,13 @@ function stationten_get_event_entries($status)
 
     if ($query->have_posts()) {
         foreach ($query->posts as $post) {
+            $image = get_the_post_thumbnail_url($post, 'medium_large');
+
             $entries[] = array(
                 'date' => get_post_meta($post->ID, 'stationten_event_date_label', true),
                 'title' => get_the_title($post),
                 'description' => get_the_excerpt($post),
-                'image' => get_the_post_thumbnail_url($post, 'medium_large'),
+                'image' => $image ?: stationten_fallback_event_image($post->post_title),
             );
         }
 
@@ -704,6 +726,7 @@ function stationten_get_event_entries($status)
 
     foreach ($defaults['events'] as $event) {
         if ($event['status'] === $status) {
+            $event['image'] = stationten_fallback_event_image($event['title']);
             $entries[] = $event;
         }
     }

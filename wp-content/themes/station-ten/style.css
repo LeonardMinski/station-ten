@@ -239,8 +239,9 @@ textarea {
     overflow: hidden;
     min-height: 300px;
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0)),
-        linear-gradient(135deg, rgba(77, 125, 122, 0.18), rgba(232, 225, 216, 0.85));
+        linear-gradient(180deg, rgba(255, 253, 249, 0.55), rgba(255, 253, 249, 0.15)),
+        linear-gradient(135deg, rgba(77, 125, 122, 0.62), rgba(232, 225, 216, 0.92)),
+        url('assets/images/main-hero.jpg') center / cover no-repeat;
 }
 
 .station-hero::after {
@@ -432,9 +433,16 @@ textarea {
 .station-link-media {
     min-height: 160px;
     border-radius: 14px;
+    overflow: hidden;
     background:
         linear-gradient(135deg, rgba(147, 166, 148, 0.28), rgba(77, 125, 122, 0.14)),
         #e4e0da;
+}
+
+.station-link-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .station-link-card strong {

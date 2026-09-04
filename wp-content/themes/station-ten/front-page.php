@@ -40,12 +40,16 @@ $data = stationten_data();
         </div>
         <div class="station-link-grid">
             <a class="station-link-card" href="<?php echo esc_url(stationten_page_url('menu') . '#food'); ?>">
-                <div class="station-link-media" aria-hidden="true"></div>
+                <div class="station-link-media">
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/small-plates.jpg'); ?>" alt="Food at Station Ten">
+                </div>
                 <span class="station-pill">Food</span>
                 <strong>Mains and small plates</strong>
             </a>
             <a class="station-link-card" href="<?php echo esc_url(stationten_page_url('menu') . '#drinks'); ?>">
-                <div class="station-link-media" aria-hidden="true"></div>
+                <div class="station-link-media">
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/cocktails.jpg'); ?>" alt="Cocktails at Station Ten">
+                </div>
                 <span class="station-pill">Drinks</span>
                 <strong>Cocktails and signatures</strong>
             </a>
